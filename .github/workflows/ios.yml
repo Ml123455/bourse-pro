@@ -21,7 +21,10 @@ jobs:
       - name: Install Capacitor CLI
         run: npm install @capacitor/cli @capacitor/ios
 
-      - name: Build web assets
+      - name: Add iOS platform
+        run: npx cap add ios
+
+      - name: Sync web assets
         run: npx cap sync ios
 
       - name: Build iOS app

@@ -15,17 +15,17 @@ jobs:
         with:
           node-version: 20
 
-      - run: npm ci
+      - run: npm install
       - run: npm run build
 
       - name: Sync iOS
-        run: npx cap sync ios
+        run: npx cap sync ios 2>&1
 
       - name: Build iOS app
         run: |
           cd ios/App
           xcodebuild \
-            -workspace App.xcworkspace \
+            -project App.xcodeproj \
             -scheme App \
             -sdk iphoneos \
             -configuration Release \
@@ -33,7 +33,7 @@ jobs:
             archive \
             CODE_SIGNING_ALLOWED=NO \
             CODE_SIGNING_REQUIRED=NO \
-            CODE_SIGN_IDENTITY="" 
+            CODE_SIGN_IDENTITY=""
 
       - name: Package IPA
         run: |

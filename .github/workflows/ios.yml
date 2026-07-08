@@ -18,8 +18,8 @@ jobs:
       - run: npm install
       - run: npm run build
 
-      - name: Sync iOS
-        run: npx cap sync ios 2>&1
+      - name: Copy web assets to iOS
+        run: rm -rf ios/App/App/public/* && cp -r dist/* ios/App/App/public/
 
       - name: Build iOS app
         run: |
